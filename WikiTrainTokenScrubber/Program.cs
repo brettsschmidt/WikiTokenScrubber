@@ -153,7 +153,7 @@ namespace WikiTrainTokenScrubber
                                 var splity = new List<string>();
                                 foreach(var word in initialsplity)
                                 {
-                                    if(word != " ")
+                                    if (word.Trim(' ') != "") 
                                     {
                                         splity.Add(word.Trim(' '));
                                     }
