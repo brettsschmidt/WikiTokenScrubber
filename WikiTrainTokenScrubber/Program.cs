@@ -149,13 +149,21 @@ namespace WikiTrainTokenScrubber
                                 // Initalize array of floats (our 5x5 matrix represented in 1-dim)
                                 var array = new List<float>();
                                 // Create an array of words by splitting up the line by spaces.
-                                var splity = sentence.Split(' ');
+                                var initialsplity = sentence.Split(' ');
+                                var splity = new List<string>();
+                                foreach(var word in initialsplity)
+                                {
+                                    if(word != " ")
+                                    {
+                                        splity.Add(word.Trim(' '));
+                                    }
+                                }
                                 // Make sure its not an empty spot or a sentence with more than 25 words
                                 //      and iterate through the words.
                                 //      I also don't want the sentences with "unk"
-                                if (splity.Length > 1 && splity.Length < 26 && !splity.Contains("unk"))
+                                if (splity.Count > 1 && splity.Count < 26 && !splity.Contains("unk"))
                                 {
-                                    for (int i = 0; i < splity.Length; i++)
+                                    for (int i = 0; i < splity.Count; i++)
                                     {
                                         if (index.Exists(x => x == splity[i]))
                                         {
@@ -167,7 +175,7 @@ namespace WikiTrainTokenScrubber
                                             array.Add(index.Count);
                                         }
                                     }
-                                    for (int i = splity.Length; i < 26; i++)
+                                    for (int i = splity.Count; i < 26; i++)
                                     {
                                         array.Add(0);
                                     }
